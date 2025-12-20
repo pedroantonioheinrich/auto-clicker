@@ -32,7 +32,7 @@ sudo apt install python3-tk python3-dev libpng-dev libjpeg-dev scrot
 
 1. **Clone the repository:**
 ```bash
-git clone [https://github.com/pedroantonioheinrich/auto-clicker/]
+git clone https://github.com/pedroantonioheinrich/auto-clicker/
 cd auto-clicker
 
 ```
