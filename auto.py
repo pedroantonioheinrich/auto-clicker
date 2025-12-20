@@ -6,7 +6,7 @@ import threading
 
 
 janela = tk.Tk()
-janela.title("AutoClick by Pedro") 
+janela.title("AutoClick by @streetegist") 
 janela.geometry("400x200")
 
 
@@ -28,7 +28,6 @@ def loop_clique():
         
         # Verifica se o mouse saiu da posição alvo
         if abs(atual_x - alvo_x) > tolerancia or abs(atual_y - alvo_y) > tolerancia:
-            print("Movimento detectado! Parando autoclick por segurança.")
             parar_tudo()
             break
             
@@ -49,8 +48,8 @@ def parar_tudo():
     btn_fechar.pack_forget()
     label_status3.pack_forget()
     label_status.pack(pady=5)
-    label_status.config(text="Status: PARADO", fg="red")
-    btn_start.config(text="Reiniciar", bg="blue",fg="white", state="normal")
+    label_status.config(text="Status: STOPED", fg="red")
+    btn_start.config(text="Restart", bg="blue",fg="white", state="normal")
 
 def ao_clicar(x, y, botao, pressionado):
     global posicao_x, posicao_y, clicking
@@ -63,8 +62,8 @@ def ao_clicar(x, y, botao, pressionado):
         label_status3.pack(pady=1)
         posicao_x, posicao_y = x, y
         clicking = True
-        label_status4.config(text=f'Alvo definido em x:{x} e y:{y}\nRodando...\nNão mova o mouse!', fg="red")
-        btn_start.config(text="Rodando...", bg="green", fg="white", state="disabled")
+        label_status4.config(text=f"Target defined (x:{x} e y:{y})\nIs Running...\nDon't Move the Cursor!", fg="red")
+        btn_start.config(text="Running...", bg="green", fg="white", state="disabled")
         # Dispara os cliques em uma linha de execução separada (Thread)
         threading.Thread(target=loop_clique, daemon=True).start()
         
@@ -77,7 +76,7 @@ def coordenadas():
         print(f'Ouvinte: {ouvinte}')
 
 def preparar_captura():
-    label_status.config(text="CLIQUE ONDE DESEJA O AUTOCLICK", fg="black", bg="yellow")
+    label_status.config(text="CLICK SOMEWHERE ON THE SCREEN", fg="black", bg="yellow")
     label_status2 = tk.Label(janela, text="")
     label_status2.pack(pady=1)
     btn_start.pack_forget()
@@ -87,19 +86,19 @@ def preparar_captura():
     threading.Thread(target=coordenadas, daemon=True).start()
 
 
-label_status = tk.Label(janela, text="1. Clique em 'Selecionar Área'\n2. Clique onde deseja o AutoClick", fg="blue")
+label_status = tk.Label(janela, text="1. Click START and 'Select The Area'\n2. Click Wherever You Want The AutoClick", fg="blue")
 label_status.pack(pady=10)
 
 label_status4 = tk.Label()
 
 contador_status = tk.Label(janela)
 
-label_status3 = tk.Label(janela, text="Mova o mouse para PARAR o programa!")
+label_status3 = tk.Label(janela, text="Move the cursor to STOP the program!")
 
-btn_start = tk.Button(janela, text="Começar", command=preparar_captura, bg="lightblue")
+btn_start = tk.Button(janela, text="Start", command=preparar_captura, bg="blue")
 btn_start.pack(pady=1)
 
-btn_fechar = tk.Button(janela, text="Parar Programa", command=parar_tudo, bg="grey")
+btn_fechar = tk.Button(janela, text="Close", command=parar_tudo, bg="grey")
 btn_fechar.pack(pady=1)
 
 janela.mainloop()
