@@ -1,30 +1,30 @@
 #!/bin/bash
 
-# Nome do ambiente virtual
+# Nome padrão do ambiente virtual (com ponto para ser oculto)
 VENV_NAME=".venv"
 
-echo "=== Iniciando instalação do projeto Auto-Clicker ==="
+echo "=== Ajustando e instalando dependências do Auto-Clicker ==="
 
-# 1. Instala dependências do sistema Ubuntu necessárias para GUI e Automação
-echo "Instalando dependências do sistema (sudo)..."
-sudo apt update
-sudo apt install -y python3-tk python3-venv python3-dev libx11-dev libxtst-dev
+# 1. Se existir uma pasta 'venv' sem ponto, vamos renomear para '.venv'
+if [ -d "venv" ] && [ ! -d ".venv" ]; then
+    echo "Renomeando pasta 'venv' para '.venv' para seguir o padrão..."
+    mv venv .venv
+fi
 
-# 2. Cria o ambiente virtual
+# 2. Instala dependências do sistema
+sudo apt update && sudo apt install -y python3-tk python3-venv python3-dev libx11-dev libxtst-dev
+
+# 3. Cria o ambiente virtual se não existir
 if [ ! -d "$VENV_NAME" ]; then
-    echo "Criando ambiente virtual..."
     python3 -m venv "$VENV_NAME"
 fi
 
-# 3. Atualiza o pip e instala as dependências do arquivo requirements.txt
-echo "Instalando pacotes Python dentro do venv..."
+# 4. Instala os pacotes
+echo "Instalando pacotes no ambiente $VENV_NAME..."
 ./$VENV_NAME/bin/pip install --upgrade pip
 ./$VENV_NAME/bin/pip install -r requirements.txt
 
-echo ""
 echo "----------------------------------------------------"
-echo "Sucesso! Tudo foi instalado corretamente."
-echo "Para ativar o ambiente e rodar o projeto:"
-echo "source $VENV_NAME/bin/activate"
-echo "python3 seu_arquivo_principal.py"
+echo "Pronto! Agora use sempre:"
+echo "source .venv/bin/activate"
 echo "----------------------------------------------------"
