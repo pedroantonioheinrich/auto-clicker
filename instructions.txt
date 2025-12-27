@@ -1,0 +1,8 @@
+Dê permissão de execução ao script no terminal:
+
+
+chmod +x install_deps.sh
+
+Execute o script:
+
+./install_deps.sh
