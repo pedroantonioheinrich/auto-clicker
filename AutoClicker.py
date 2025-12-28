@@ -15,9 +15,6 @@ class App(ct.CTk):
         self.geometry("400x200")
         self.title("AutoClick by @streetegist")
 
-        # Starting Position Window
-
-
         def loop_clique():
             self.clicking, self.posicao_x, self.posicao_y, self.contador, self.tempoInterval
             
